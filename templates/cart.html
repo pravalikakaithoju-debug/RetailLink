@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+    <style>
+        body{
+            font-family:Arial;
+            background:#f4f8ff;
+            padding:40px;
+        }
+
+        table{
+            width:100%;
+            background:white;
+            border-collapse:collapse;
+            box-shadow:0 5px 20px rgba(0,0,0,.1);
+        }
+
+        th,td{
+            padding:15px;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+        }
+
+        th{
+            background:#0d6efd;
+            color:white;
+        }
+
+        h1{
+            color:#0d6efd;
+        }
+
+        .total{
+            margin-top:20px;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        button{
+            margin-top:20px;
+            padding:15px 30px;
+            border:none;
+            background:#0d6efd;
+            color:white;
+            font-size:18px;
+            border-radius:8px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Your Cart</h1>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.qty }}</td>
+        <td>₹{{ item.product.price }}</td>
+        <td>₹{{ item.total }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="total">
+    Grand Total: ₹{{ grand_total }}
+</div>
+
+<a href="/place-order/">
+    <button>Place Order</button>
+</a>
+
+</body>
+</html>

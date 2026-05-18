@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Details</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial;
+            background:#f4f8ff;
+        }
+
+        nav{
+            background:#0d6efd;
+            color:white;
+            padding:18px 35px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            font-size:17px;
+        }
+
+        .container{
+            width:90%;
+            margin:40px auto;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 4px 15px rgba(0,0,0,.08);
+        }
+
+        h1{
+            color:#0d6efd;
+            margin-bottom:20px;
+        }
+
+        .info{
+            margin-bottom:25px;
+            line-height:2;
+            font-size:18px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th{
+            background:#0d6efd;
+            color:white;
+            padding:14px;
+        }
+
+        td{
+            padding:14px;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+        }
+
+        tr:hover{
+            background:#f7f9fc;
+        }
+
+        .total{
+            margin-top:25px;
+            text-align:right;
+            font-size:24px;
+            font-weight:bold;
+            color:#0d6efd;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div>
+        RetailLink
+    </div>
+
+    <div>
+
+        <a href="/products/">
+            Products
+        </a>
+
+        <a href="/cart/">
+            Cart
+        </a>
+
+        <a href="/my-orders/">
+            My Orders
+        </a>
+
+        <a href="/logout/">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            Order #{{ order.id }}
+        </h1>
+
+        <div class="info">
+
+            <strong>Status:</strong>
+            {{ order.status }}
+
+            <br>
+
+            <strong>Date:</strong>
+            {{ order.created_at }}
+
+        </div>
+
+        <table>
+
+            <tr>
+
+                <th>Product</th>
+
+                <th>Quantity</th>
+
+                <th>Total Price</th>
+
+            </tr>
+
+            {% for item in items %}
+
+            <tr>
+
+                <td>
+                    {{ item.product.name }}
+                </td>
+
+                <td>
+                    {{ item.quantity }}
+                </td>
+
+                <td>
+                    ₹{{ item.total_price }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <div class="total">
+
+            Grand Total:
+            ₹{{ order.total_amount }}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

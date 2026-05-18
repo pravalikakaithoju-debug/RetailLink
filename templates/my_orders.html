@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial;
+            background:#f4f8ff;
+        }
+
+        nav{
+            background:#0d6efd;
+            color:white;
+            padding:18px 35px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            font-size:17px;
+        }
+
+        .container{
+            width:90%;
+            margin:40px auto;
+        }
+
+        h1{
+            color:#0d6efd;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            box-shadow:0 4px 15px rgba(0,0,0,.08);
+        }
+
+        th{
+            background:#0d6efd;
+            color:white;
+            padding:15px;
+        }
+
+        td{
+            padding:15px;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+        }
+
+        tr:hover{
+            background:#f7f9fc;
+        }
+
+        .empty{
+            background:white;
+            padding:40px;
+            text-align:center;
+            border-radius:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div>
+        RetailLink
+    </div>
+
+    <div>
+
+        <a href="/products/">
+            Products
+        </a>
+
+        <a href="/cart/">
+            Cart
+        </a>
+
+        <a href="/logout/">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <h1>My Orders</h1>
+
+    {% if orders %}
+
+    <table>
+
+        <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+        </tr>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <td>
+
+                <a href="/order/{{ order.id }}/">
+
+                     {{ order.id }}
+
+                </a>
+
+            </td>
+
+            <td>
+                {{ order.created_at }}
+            </td>
+
+            <td>
+                ₹{{ order.total_amount }}
+            </td>
+            <td>
+                 {{ order.status }}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <div class="empty">
+
+        <h2>No Orders Yet</h2>
+
+        <p>
+            Your placed orders will appear here.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

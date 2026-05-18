@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Dashboard</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial;
+            background:#f4f8ff;
+        }
+
+        nav{
+            background:#0d6efd;
+            color:white;
+            padding:18px 35px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            font-size:17px;
+        }
+
+        .container{
+            width:90%;
+            margin:40px auto;
+        }
+
+        h1{
+            color:#0d6efd;
+            margin-bottom:30px;
+        }
+
+        .cards{
+
+            display:grid;
+
+            grid-template-columns:
+            repeat(auto-fit,minmax(250px,1fr));
+
+            gap:25px;
+
+            margin-bottom:40px;
+
+        }
+
+        .card{
+
+            background:white;
+
+            padding:30px;
+
+            border-radius:15px;
+
+            box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+            text-align:center;
+
+        }
+
+        .card h2{
+
+            margin:0;
+
+            color:#0d6efd;
+
+            font-size:40px;
+
+        }
+
+        .card p{
+
+            margin-top:10px;
+
+            font-size:18px;
+
+        }
+
+        table{
+
+            width:100%;
+
+            border-collapse:collapse;
+
+            background:white;
+
+            border-radius:15px;
+
+            overflow:hidden;
+
+            box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+        }
+
+        th{
+
+            background:#0d6efd;
+
+            color:white;
+
+            padding:15px;
+
+        }
+
+        td{
+
+            padding:15px;
+
+            text-align:center;
+
+            border-bottom:1px solid #ddd;
+
+        }
+
+        tr:hover{
+
+            background:#f7f9fc;
+
+        }
+
+        a.button{
+
+            display:inline-block;
+
+            margin-top:30px;
+
+            background:#0d6efd;
+
+            color:white;
+
+            text-decoration:none;
+
+            padding:12px 22px;
+
+            border-radius:10px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div>
+
+        RetailLink Dashboard
+
+    </div>
+
+    <div>
+
+        <a href="/products/">
+            Products
+        </a>
+
+        <a href="/cart/">
+            Cart
+        </a>
+
+        <a href="/my-orders/">
+            My Orders
+        </a>
+
+        <a href="/logout/">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <h1>
+
+        Welcome, {{ request.user.username }}
+
+    </h1>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h2>
+
+                {{ total_orders }}
+
+            </h2>
+
+            <p>
+
+                Total Orders
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>
+
+                {{ pending_orders }}
+
+            </h2>
+
+            <p>
+
+                Pending Orders
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>
+
+                {{ delivered_orders }}
+
+            </h2>
+
+            <p>
+
+                Delivered Orders
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <h1>
+
+        Recent Orders
+
+    </h1>
+
+    <table>
+
+        <tr>
+
+            <th>Order ID</th>
+
+            <th>Status</th>
+
+            <th>Total</th>
+
+            <th>Date</th>
+
+        </tr>
+
+        {% for order in recent_orders %}
+
+        <tr>
+
+            <td>
+
+                <a href="/order/{{ order.id }}/">
+
+                    {{ order.id }}
+
+                </a>
+
+            </td>
+
+            <td>
+
+                {{ order.status }}
+
+            </td>
+
+            <td>
+
+                ₹{{ order.total_amount }}
+
+            </td>
+
+            <td>
+
+                {{ order.created_at }}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <a href="/products/" class="button">
+
+        Continue Shopping
+
+    </a>
+
+</div>
+
+</body>
+</html>
